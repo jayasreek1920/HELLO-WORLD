@@ -1,0 +1,11 @@
+SELECT
+    p.category,
+    SUM(oi.quantity * oi.price_per_unit) AS total_category_revenue
+FROM
+    Products p
+JOIN
+    Order_Items oi ON p.product_id = oi.product_id
+GROUP BY
+    p.category
+ORDER BY
+    total_category_revenue DESC;
