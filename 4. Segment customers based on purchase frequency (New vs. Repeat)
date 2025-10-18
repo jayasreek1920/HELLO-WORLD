@@ -1,0 +1,19 @@
+WITH customer_order_counts AS (
+    SELECT
+        customer_id,
+        COUNT(order_id) AS number_of_orders
+    FROM
+        orders
+    GROUP BY
+        customer_id
+)
+SELECT
+    CASE
+        WHEN number_of_orders = 1 THEN 'One-time Customer'
+        ELSE 'Repeat Customer'
+    END AS customer_type,
+    COUNT(customer_id) AS customer_count
+FROM
+    customer_order_counts
+GROUP BY
+    customer_type;
